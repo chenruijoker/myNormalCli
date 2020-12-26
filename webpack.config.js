@@ -19,15 +19,35 @@ module.exports = {
         })
     ],
     devServer: {
-        contentBase: './dist'
+        contentBase: './dist',
+        hot: true,
+        open: true
     },
     module: {
         rules: [{
-            test: /\.css$/,
-            use: [
-                'style-loader',
-                'css-loader',
-            ]
-        }]
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                ]
+            },
+            {
+                test: /\.jsx?$/,
+                exclude: /node_modules/, // 排除 node_modules 文件夹
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        babelrc: false,
+                        presets: [
+                            require.resolve('@babel/preset-react'), [require.resolve('@babel/preset-env'), { modules: false }]
+                        ],
+                        cacheDirectory: true
+                    }
+                }
+            }
+        ]
+    },
+    resolve: {
+        extensions: ['.wasm', '.mjs', '.js', '.json', '.jsx']
     }
 };

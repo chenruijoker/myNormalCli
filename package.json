@@ -4,9 +4,9 @@
     "description": "基本脚手架",
     "private": true,
     "scripts": {
-        "dev": "webpack-dev-server --open",
+        "dev": "webpack serve",
         "build": "webpack",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "watch": "webpack --watch"
     },
     "repository": {
         "type": "git",
@@ -27,6 +27,8 @@
         "css-loader": "^5.0.1",
         "file-loader": "^6.2.0",
         "html-webpack-plugin": "^4.5.0",
+        "less": "^4.0.0",
+        "less-loader": "^7.2.0",
         "style-loader": "^2.0.0",
         "webpack": "^5.11.0",
         "webpack-cli": "^4.2.0",
