@@ -1,56 +1,72 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-    devtool: 'inline-source-map',
+    // devtool: 'inline-source-map',
     entry: {
-        app: './src/index.js'
+        app: "./src/index.js",
     },
     output: {
-        filename: '[name].js',
-        path: path.resolve(__dirname, 'dist')
+        filename: "[name].js",
+        path: path.resolve(__dirname, "dist"),
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'css/[name].css'
+            filename: "css/[name].css",
         }),
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            template: './demo/index.html',
-            filename: 'index.html'
-        })
+            template: "./demo/index.html",
+            filename: "index.html",
+        }),
     ],
     devServer: {
-        contentBase: './dist',
+        contentBase: "./dist",
         hot: true,
-        compress: true,
-        open: true
+        inline: true,
+        open: true,
     },
     module: {
-        rules: [{
+        rules: [
+            {
                 test: /\.(c|le|sc)ss$/,
-                use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'less-loader', 'sass-loader']
+                use: [
+                    "style-loader",
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            esModule: false,
+                        },
+                    },
+                    "css-loader",
+                    "postcss-loader",
+                    "less-loader",
+                    "sass-loader",
+                ],
             },
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/, // 排除 node_modules 文件夹
                 use: {
-                    loader: 'babel-loader',
+                    loader: "babel-loader",
                     options: {
                         babelrc: false,
                         presets: [
-                            require.resolve('@babel/preset-react'), [require.resolve('@babel/preset-env'), { modules: false }]
+                            require.resolve("@babel/preset-react"),
+                            [
+                                require.resolve("@babel/preset-env"),
+                                { modules: false },
+                            ],
                         ],
-                        cacheDirectory: true
-                    }
-                }
-            }
-        ]
+                        cacheDirectory: true,
+                    },
+                },
+            },
+        ],
     },
     resolve: {
-        extensions: ['.wasm', '.mjs', '.js', '.json', '.jsx']
-    }
+        extensions: [".wasm", ".mjs", ".js", ".json", ".jsx"],
+    },
 };
