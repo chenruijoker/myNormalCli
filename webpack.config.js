@@ -52,6 +52,7 @@ module.exports = {
                     {
                         loader: MiniCssExtractPlugin.loader, // 支持分离css，顺序不能随意变动
                         options: {
+                            publicPath: "../",  // 防止css 图片报错
                             esModule: false,
                         },
                     },
@@ -63,7 +64,7 @@ module.exports = {
             },
             {
                 // 加载图片
-                test: /\.(png|svg|jpg|gif)$/,
+                test: /\.(png|svg|jpe?g|gif)$/,
                 use: [
                     {
                         loader: "url-loader",
