@@ -12,6 +12,7 @@ module.exports = {
     },
     output: {
         filename: "[name].js",
+        publicPath: "./",
         path: path.resolve(__dirname, "build"),
     },
     optimization: {
@@ -75,7 +76,6 @@ module.exports = {
                         options: {
                             limit: 10 * 1024, // 图片小于10KB值的时候变为base64直接附着在js中(这里的单位为B)
                             outputPath: "static/", //打包后的图片放在 build/static/下边
-                            publicPath: "./static/",
                             name: "[name][hash:8].[ext]",
                             esModule: false,
                         },
