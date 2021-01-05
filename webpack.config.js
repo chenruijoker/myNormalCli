@@ -12,7 +12,7 @@ module.exports = {
     },
     output: {
         filename: "[name].js",
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(__dirname, "build"),
     },
     optimization: {
         // 优化项
@@ -35,7 +35,7 @@ module.exports = {
         }),
     ],
     devServer: {
-        contentBase: "./dist",
+        contentBase: "./build",
         hot: true,
         compress: true,
         inline: true,
@@ -45,6 +45,10 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.html?$/,
+                use: "html-withimg-loader",
+            },
+            {
                 //支持css、less、scss
                 test: /\.(c|le|sc)ss$/,
                 use: [
@@ -52,7 +56,7 @@ module.exports = {
                     {
                         loader: MiniCssExtractPlugin.loader, // 支持分离css，顺序不能随意变动
                         options: {
-                            publicPath: "../",  // 防止css 图片报错
+                            publicPath: "../", // 防止css 图片报错
                             esModule: false,
                         },
                     },
@@ -70,7 +74,8 @@ module.exports = {
                         loader: "url-loader",
                         options: {
                             limit: 10 * 1024, // 图片小于10KB值的时候变为base64直接附着在js中(这里的单位为B)
-                            outputPath: "static/", //打包后的图片放在 dist/static/下边
+                            outputPath: "static/", //打包后的图片放在 build/static/下边
+                            publicPath: "./static/",
                             name: "[name][hash:8].[ext]",
                             esModule: false,
                         },

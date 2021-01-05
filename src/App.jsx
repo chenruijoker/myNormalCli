@@ -8,7 +8,7 @@ function App(props) {
     <div className="App">
       这是首页
       <span className="test">这是测试字体</span>
-      {/* <img src={Img1} /> */}
+      <img src={Img1} style={{width:200,height:200}} />
       <div>
         <Test />
       </div>
