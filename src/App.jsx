@@ -4,6 +4,10 @@ import Test from "./components/Test";
 import Img1 from './static/test.png'; // 图片的引用都是采用这种方式
 
 function App(props) {
+
+  console.log(21213);
+
+
   return (
     <div className="App">
       这是首页

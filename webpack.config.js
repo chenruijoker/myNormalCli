@@ -7,6 +7,7 @@ const UglifyJs = require("uglifyjs-webpack-plugin");
 
 module.exports = {
     // devtool: 'inline-source-map',
+    target: "web",  // 为了支持热更新
     entry: {
         app: "./src/index.js",
     },
@@ -18,10 +19,10 @@ module.exports = {
     optimization: {
         // 优化项
         minimizer: [
-            new UglifyJs({
-                cache: true, //是否缓存
-                parallel: true, //是否并发操作
-            }),
+            // new UglifyJs({   // 这里需要判断一下环境进行不同加载
+            //     cache: true, //是否缓存
+            //     parallel: true, //是否并发操作
+            // }),
             new OptimizeCSSAssetsPlugin({}),
         ],
     },
